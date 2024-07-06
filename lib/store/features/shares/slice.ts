@@ -13,7 +13,11 @@ const sharesSlice = createSlice({
         status: 'idle',
         error: null,
     },
-    reducers: {},
+    reducers: {
+        setData: (state, action) => {
+            state.data = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchShares.pending, (state) => {
@@ -30,5 +34,5 @@ const sharesSlice = createSlice({
             });
     },
 });
-
+export const { setData } = sharesSlice.actions;
 export default sharesSlice.reducer;

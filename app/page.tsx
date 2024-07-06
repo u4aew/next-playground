@@ -1,5 +1,17 @@
-const Home = () => {
-    return <div>Hello world</div>
-}
+import React from 'react';
+import { getShares } from '@/actions/shares';
+import { ServerSharesList } from '@/components/server/ServerSharesList';
+import { FinancialInstrument } from '@/typing';
 
-export default Home
+const Page = async () => {
+  const res = await getShares();
+  return (
+    <div>
+      <ServerSharesList
+        instruments={res.data.instruments as FinancialInstrument[]}
+      />
+    </div>
+  );
+};
+
+export default Page;
