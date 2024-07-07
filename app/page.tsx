@@ -1,15 +1,13 @@
 import React from 'react';
 import { getShares } from '@/actions/shares';
-import { ServerSharesList } from '@/components/server/ServerSharesList';
+import { SharesList } from '@/components/SharesList';
 import { FinancialInstrument } from '@/typing';
 
 const Page = async () => {
   const res = await getShares();
   return (
     <div>
-      <ServerSharesList
-        instruments={res.data.instruments as FinancialInstrument[]}
-      />
+      <SharesList instruments={res.data.instruments as FinancialInstrument[]} />
     </div>
   );
 };

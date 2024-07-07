@@ -1,8 +1,8 @@
 'use client';
 
-import { Provider } from 'react-redux';
-import { store } from '@/lib/store';
 import './globals.css';
+import styles from './layout.module.scss';
+import Footer from '@/components/Footer/Footer';
 
 export default function RootLayout({
   children,
@@ -11,8 +11,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Provider store={store}>{children}</Provider>
+      <body className={styles.layout}>
+        <div className={styles.header}>Header</div>
+        <div className={styles.main}>
+          <div className={styles.sidebar}>sidebar</div>
+          <div className={styles.content}>{children}</div>
+        </div>
+        <div className={styles.footer}>
+          <Footer />
+        </div>
       </body>
     </html>
   );
