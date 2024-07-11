@@ -1,6 +1,6 @@
 import { IFinancialInstrument } from '@/typing';
 import { ServerSharePreview } from '../SharePreview';
-import styles from './SharesList.module.scss';
+import styles from './sharesList.module.scss';
 
 type Props = {
   instruments: IFinancialInstrument[];
