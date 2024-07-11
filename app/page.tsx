@@ -3,11 +3,13 @@ import { getShares } from '@/actions/shares';
 import { SharesList } from '@/components/SharesList';
 import { FinancialInstrument } from '@/typing';
 
+import styles from './page.module.scss';
+
 const Page = async () => {
-  const res = await getShares();
+  const { data } = await getShares();
   return (
-    <div>
-      <SharesList instruments={res.data.instruments as FinancialInstrument[]} />
+    <div className={styles.page}>
+      <SharesList instruments={data.data as FinancialInstrument[]} />
     </div>
   );
 };

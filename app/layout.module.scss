@@ -1,43 +1,17 @@
 .layout {
-  display: grid;
-  grid-template-areas:
-    'header header'
-    'sidebar main'
-    'footer footer';
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
-
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
   .header {
-    grid-area: header;
-    background-color: #f0f0f0;
     padding: 1rem;
+    background-color: var(--header-background-color);
   }
 
-  .content {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-
-    .sidebar {
-      grid-area: sidebar;
-      background-color: #e0e0e0;
-      padding: 1rem;
-    }
-
-    .main {
-      grid-area: main;
-      padding: 1rem;
-    }
+  .main {
+    padding: 1rem;
+    flex: 1;
   }
 
   .footer {
     grid-area: footer;
-    background-color: #d0d0d0;
     padding: 1rem;
+    background-color: var(--footer-background-color);
   }
 }
