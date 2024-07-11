@@ -1,12 +1,21 @@
-import { FinancialInstrument } from '@/typing';
+import { IFinancialInstrument } from '@/typing';
 import { ServerSharePreview } from '../SharePreview';
+import styles from './SharesList.module.scss';
 
 type Props = {
-  instruments: FinancialInstrument[];
+  instruments: IFinancialInstrument[];
 };
 
 export const SharesList = ({ instruments }: Props) => {
-  return instruments.map((item, key) => {
-    return <ServerSharePreview value={item}  key={key}></ServerSharePreview>;
-  })
+  return (
+    <div>
+      <div className={styles.list}>
+        {instruments.map((item, key) => (
+          <div key={key} className={styles.listItem}>
+            <ServerSharePreview value={item} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };

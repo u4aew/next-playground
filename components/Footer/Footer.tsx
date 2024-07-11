@@ -2,7 +2,7 @@
 import { getFooter } from '@/actions/footer';
 import styles from './footer.module.scss';
 
-const Footer = async () => {
+export const Footer = async () => {
   const { data } = await getFooter();
   return (
     <footer className={styles.footer}>
