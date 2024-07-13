@@ -8,10 +8,11 @@ import styles from './page.module.scss';
 const Page = async () => {
   const { data } = await getShares();
   return (
-    <div className={styles.page}>
-      <SharesList instruments={data.data as IFinancialInstrument[]} />
-    </div>
+    <>
+      <div className={styles.page}>
+        <SharesList instruments={data.data as IFinancialInstrument[]} />
+      </div>
+    </>
   );
 };
-
 export default Page;
