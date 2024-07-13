@@ -10,6 +10,30 @@ export interface IFinancialInstrument {
   brand: IBrand;
 }
 
-export interface IParamsPagination {
+export interface ILink {
+  name: string;
+  url: string;
+}
 
+export interface IColumn {
+  title: string;
+  links: ILink[];
+}
+
+export interface ICompany {
+  name: string;
+  copyright: string;
+}
+
+export interface IFooterData {
+  company: ICompany;
+  columns: IColumn[];
+}
+
+export interface IApiResponseFooter {
+  data: IFooterData;
+}
+
+export interface IApiResponseShares {
+  data: IFinancialInstrument;
 }
