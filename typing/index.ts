@@ -35,5 +35,9 @@ export interface IApiResponseFooter {
 }
 
 export interface IApiResponseShares {
-  data: IFinancialInstrument;
+  data: IFinancialInstrument[];
+}
+
+export interface IPagination {
+  page: number;
 }

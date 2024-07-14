@@ -7,6 +7,9 @@
   --logo-text-color: #ffffff;
   --footer-background-color: #ffffff;
   --header-background-color: #ffffff;
+  --button-border-radius: 8px;
+  --button-background-color: #2196f3;
+  --button-text-color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
