@@ -10,6 +10,8 @@
   --button-border-radius: 8px;
   --button-background-color: #2196f3;
   --button-text-color: #ffffff;
+  --link-text-color: #2196f3;
+  --pagination-link-active-color: #2196f3;
 }
 
 @media (prefers-color-scheme: dark) {

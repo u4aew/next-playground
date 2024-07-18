@@ -8,12 +8,14 @@
   flex-wrap: wrap;
   margin: 0 -5px;
 }
+
 .listItem {
   max-width: calc(25% - 10px);
   flex-basis: calc(25% - 10px);
   margin: 5px;
   display: flex;
 }
+
 .pagination {
   padding-top: 2em;
 }
@@ -30,5 +32,27 @@
     &:hover {
       opacity: .5;
     }
+  }
+}
+
+/* Адаптивные стили */
+@media (max-width: 1024px) { /* Планшеты */
+  .listItem {
+    max-width: calc(33.33% - 10px);
+    flex-basis: calc(33.33% - 10px);
+  }
+}
+
+@media (max-width: 768px) { /* Мобильные устройства */
+  .listItem {
+    max-width: calc(50% - 10px);
+    flex-basis: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) { /* Маленькие мобильные устройства */
+  .listItem {
+    max-width: calc(100% - 10px);
+    flex-basis: calc(100% - 10px);
   }
 }

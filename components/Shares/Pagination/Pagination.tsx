@@ -1,28 +1,95 @@
 import Link from 'next/link';
+import classNames from 'classnames';
+import { createPageArray } from '@/utils';
+
 import styles from './pagination.module.scss';
 
 export const Pagination = ({
   currentPage,
   totalPages,
+  itemsPerPage,
+  currentStart,
+  currentEnd,
 }: {
   currentPage: number;
   totalPages: number;
+  itemsPerPage: number;
+  currentStart: number;
+  currentEnd: number;
 }) => {
+  const pages = createPageArray({ totalPages, currentPage });
+
+  const calculateStart = (page: number) => (page - 1) * itemsPerPage;
+  const calculateEnd = (page: number) => page * itemsPerPage;
+
+  const isActivePage = (page: number) => {
+    const pageStart = calculateStart(page);
+    const pageEnd = calculateEnd(page);
+    return (
+      (currentStart >= pageStart && currentStart < pageEnd) ||
+      (currentEnd > pageStart && currentEnd <= pageEnd) ||
+      (currentStart <= pageStart && currentEnd >= pageEnd)
+    );
+  };
+
   return (
-    <div className={styles.pagination}>
-      {currentPage > 1 && (
-        <Link href={`?page=${currentPage - 1}`} className={styles.btn}>
-          Previous
+    <div className={styles.box}>
+      <div className={styles.loadMore}>
+        <Link
+          className={styles.btn}
+          href={`?start=${currentStart}&end=${currentEnd + itemsPerPage}`}
+        >
+          Show more
         </Link>
-      )}
-      <span>
-        Page {currentPage} of {totalPages}
-      </span>
-      {currentPage < totalPages && (
-        <Link href={`?page=${currentPage + 1}`} className={styles.btn}>
-          Next
-        </Link>
-      )}
+      </div>
+      <div className={styles.pagination}>
+        <div className={styles.prev}>
+          <Link
+            href={`?start=${calculateStart(currentPage - 1)}&end=${calculateEnd(currentPage - 1)}`}
+            className={classNames(
+              styles.link,
+              currentPage <= 1 && styles.disabled,
+            )}
+          >
+            Prev
+          </Link>
+        </div>
+        <div className={styles.list}>
+          {pages.map((page, index) => {
+            if (page === '...') {
+              return (
+                <div key={index} className={styles.pageNumber}>
+                  ...
+                </div>
+              );
+            } else {
+              return (
+                <Link
+                  key={index}
+                  href={`?start=${calculateStart(page)}&end=${calculateEnd(page)}`}
+                  className={classNames(
+                    styles.pageNumber,
+                    isActivePage(page) && styles.active,
+                  )}
+                >
+                  {page}
+                </Link>
+              );
+            }
+          })}
+        </div>
+        <div className={styles.next}>
+          <Link
+            href={`?start=${calculateStart(currentPage + 1)}&end=${calculateEnd(currentPage + 1)}`}
+            className={classNames(
+              styles.link,
+              currentPage >= totalPages && styles.disabled,
+            )}
+          >
+            Next
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

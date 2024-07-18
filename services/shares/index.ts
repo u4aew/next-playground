@@ -6,9 +6,9 @@ class ServiceShares {
 
   constructor() {}
 
-  async getList({ page = 1 }: IPagination) {
+  async getList({ start = 1, end = 10 }: IPagination) {
     try {
-      const res = await getShares({ page });
+      const res = await getShares({ start, end });
       return res;
     } catch (e) {}
   }

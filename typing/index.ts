@@ -36,8 +36,12 @@ export interface IApiResponseFooter {
 
 export interface IApiResponseShares {
   data: IFinancialInstrument[];
+  total: number;
+  start: number;
+  end: number;
 }
 
 export interface IPagination {
-  page: number;
+  start: number;
+  end: number;
 }

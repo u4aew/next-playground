@@ -20,11 +20,18 @@ import {
 export const getShares = async (
   pagination: IPagination,
 ): Promise<IApiResponseShares> => {
-  const { data } = await axios.get<{ data: IFinancialInstrument[] }>(
-    `${API_BASE_URL}/shares`,
-    {
-      params: pagination,
-    },
-  );
-  return { data: data.data };
+  const { data } = await axios.get<{
+    data: IFinancialInstrument[];
+    start: number;
+    end: number;
+    total: number;
+  }>(`${API_BASE_URL}/shares`, {
+    params: pagination,
+  });
+  return {
+    data: data.data,
+    start: data.start,
+    end: data.end,
+    total: data.total,
+  };
 };
