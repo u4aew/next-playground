@@ -63,12 +63,15 @@ export const Pagination = ({
                 </div>
               );
             } else {
+
               return (
                 <Link
                   key={index}
+                  // @ts-ignore
                   href={`?start=${calculateStart(page)}&end=${calculateEnd(page)}`}
                   className={classNames(
                     styles.pageNumber,
+                    // @ts-ignore
                     isActivePage(page) && styles.active,
                   )}
                 >

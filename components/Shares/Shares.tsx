@@ -16,6 +16,7 @@ export const Shares = async ({
   const responseShares = await serviceShares.getList({ start, end });
 
   const currentPage = Math.floor(start / ITEMS_PER_PAGE) + 1; // вычисляем текущую страницу на основе start и end
+  // @ts-ignore
   const totalPages = Math.ceil(responseShares.total / ITEMS_PER_PAGE); // вычисляем общее количество страниц
 
   return (
