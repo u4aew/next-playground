@@ -63,7 +63,6 @@ export const Pagination = ({
                 </div>
               );
             } else {
-
               return (
                 <Link
                   key={index}
