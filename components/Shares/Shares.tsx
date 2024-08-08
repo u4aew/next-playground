@@ -1,4 +1,4 @@
-import { ServerSharePreview } from '../SharePreview';
+import { SharePreview } from '../SharePreview';
 import styles from './shares.module.scss';
 import { serviceShares } from '@/services';
 import { Pagination } from '@/components/Shares/Pagination';
@@ -24,7 +24,7 @@ export const Shares = async ({
       <div className={styles.list}>
         {responseShares?.data.map((item, key) => (
           <div key={key} className={styles.listItem}>
-            <ServerSharePreview value={item} />
+            <SharePreview value={item} />
           </div>
         ))}
       </div>

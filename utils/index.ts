@@ -43,3 +43,48 @@ export const createPageArray = ({
 
   return pages;
 };
+
+export function generateGradient(color: string) {
+  // Функция для преобразования HEX в RGB
+  function hexToRgb(hex: string) {
+    let bigint = parseInt(hex.slice(1), 16);
+    let r = (bigint >> 16) & 255;
+    let g = (bigint >> 8) & 255;
+    let b = bigint & 255;
+    return [r, g, b];
+  }
+
+  // Функция для преобразования RGB в HEX
+  function rgbToHex(r: number, g: number | undefined, b: number | undefined) {
+    return (
+      '#' +
+      // @ts-ignore
+      ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()
+    );
+  }
+
+  // Функция для изменения яркости цвета
+  function adjustBrightness([r, g, b]: number[], amount: number) {
+    return [
+      Math.min(255, Math.max(0, r + amount)),
+      Math.min(255, Math.max(0, g + amount)),
+      Math.min(255, Math.max(0, b + amount)),
+    ];
+  }
+
+  // Преобразуем цвет из HEX в RGB
+  let rgbColor = hexToRgb(color);
+
+  // Создаем более светлый и более темный вариант цвета
+  let lighterColor = adjustBrightness(rgbColor, 50);
+  let darkerColor = adjustBrightness(rgbColor, -50);
+
+  // Преобразуем обратно в HEX
+  // @ts-ignore
+  let lighterHex = rgbToHex(...lighterColor);
+  // @ts-ignore
+  let darkerHex = rgbToHex(...darkerColor);
+
+  // Генерируем CSS градиент
+  return `linear-gradient(45deg, ${lighterHex}, ${color}, ${darkerHex})`;
+}

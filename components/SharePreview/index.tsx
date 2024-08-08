@@ -1,1 +1,1 @@
-export * from './ServerSharePreview';
+export * from './SharePreview';

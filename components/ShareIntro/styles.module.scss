@@ -1,0 +1,24 @@
+.intro {
+  min-height: 185px;
+  border-radius: var(--intro-shares-border-radius);
+  padding: 1em;
+}
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.info {
+  display: flex;
+  margin: 0 -12px;
+  .item {
+    margin: 0 12px;
+  }
+  .subtitle {
+    opacity: .9;
+  }
+  .desc {
+    font-size: 18px;
+  }
+}
