@@ -35,3 +35,14 @@ export const getShares = async (
     total: data.total,
   };
 };
+
+export const getSharesByTicker = async (ticker: string): Promise<any> => {
+  const { data } = await axios.get<{
+    data: IFinancialInstrument[];
+  }>(`${API_BASE_URL}/sharesByTicker`, {
+    params: { ticker },
+  });
+  return {
+    data: data,
+  };
+};

@@ -45,3 +45,59 @@ export interface IPagination {
   start: number;
   end: number;
 }
+
+export interface INominal {
+  currency: string;
+  units: string;
+  nano: number;
+}
+
+export interface IMinPriceIncrement {
+  units: string;
+  nano: number;
+}
+
+export interface IInstBrand {
+  logoName: string;
+  logoBaseColor: string;
+  textColor: string;
+}
+
+interface IInstrument {
+  figi: string;
+  ticker: string;
+  classCode: string;
+  isin: string;
+  lot: number;
+  currency: string;
+  shortEnabledFlag: boolean;
+  name: string;
+  exchange: string;
+  issueSize: string;
+  countryOfRisk: string;
+  countryOfRiskName: string;
+  sector: string;
+  issueSizePlan: string;
+  nominal: INominal;
+  tradingStatus: string;
+  otcFlag: boolean;
+  buyAvailableFlag: boolean;
+  sellAvailableFlag: boolean;
+  divYieldFlag: boolean;
+  shareType: string;
+  minPriceIncrement: IMinPriceIncrement;
+  apiTradeAvailableFlag: boolean;
+  uid: string;
+  realExchange: string;
+  positionUid: string;
+  assetUid: string;
+  instrumentExchange: string;
+  forIisFlag: boolean;
+  forQualInvestorFlag: boolean;
+  weekendFlag: boolean;
+  blockedTcaFlag: boolean;
+  liquidityFlag: boolean;
+  first1minCandleDate: string;
+  first1dayCandleDate: string;
+  brand: IBrand;
+}

@@ -1,4 +1,4 @@
-import { getShares } from '@/actions/shares';
+import { getShares, getSharesByTicker } from '@/actions/shares';
 import { IApiResponseShares, IPagination } from '@/typing';
 
 class ServiceShares {
@@ -9,6 +9,13 @@ class ServiceShares {
   async getList({ start = 1, end = 10 }: IPagination) {
     try {
       const res = await getShares({ start, end });
+      return res;
+    } catch (e) {}
+  }
+
+  async getByTicker(ticker: string) {
+    try {
+      const res = await getSharesByTicker(ticker);
       return res;
     } catch (e) {}
   }
