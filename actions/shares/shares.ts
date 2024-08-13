@@ -4,6 +4,8 @@ import {
   IApiResponseShares,
   IFinancialInstrument,
   IPagination,
+  IApiResponseShareItem,
+  IInstrument,
 } from '@/typing';
 
 /**
@@ -38,11 +40,23 @@ export const getShares = async (
 
 export const getSharesByTicker = async (ticker: string): Promise<any> => {
   const { data } = await axios.get<{
-    data: IFinancialInstrument[];
+    data: IInstrument;
   }>(`${API_BASE_URL}/sharesByTicker`, {
     params: { ticker },
   });
   return {
-    data: data,
+    data,
   };
 };
+
+export const getLastPriceByTicker = async (ticker: string): Promise<any> => {
+  const { data } = await axios.get<{
+    data: IInstrument;
+  }>(`${API_BASE_URL}/lastPriceByTicker`, {
+    params: { ticker },
+  });
+  return {
+    data,
+  };
+};
+

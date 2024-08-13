@@ -1,16 +1,14 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import { ShareIntro } from '@/components/ShareIntro';
-import { Button } from '@/components/Button';
+import { BuyStock } from '@/components/BuyStock';
 import { serviceShares } from '@/services';
 
-const data = {
-  brand: { bg: '#1a5ea0', color: 'white' },
-};
-
-const ItemPage = async ({ params }: { params: { slug: string } }) => {
-  const res = await serviceShares.getByTicker(params.slug);
-  console.log(res, res)
+const PageStock = async ({ params }: { params: { slug: string } }) => {
+  const { data } = await serviceShares.getByTicker(params.slug);
+  const { data: dataLastPrice } = await serviceShares.getLastPriceByTicker(
+    params.slug,
+  );
   return (
     <div className={styles.page}>
       <div className={styles.main}>
@@ -18,14 +16,10 @@ const ItemPage = async ({ params }: { params: { slug: string } }) => {
         <ShareIntro value={data} />
       </div>
       <div className={styles.side}>
-        <div>
-          <div>
-            <Button>BUY</Button>
-          </div>
-        </div>
+        <BuyStock info={dataLastPrice} />
       </div>
     </div>
   );
 };
 
-export default ItemPage;
+export default PageStock;

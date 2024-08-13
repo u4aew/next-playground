@@ -1,6 +1,8 @@
+import styles from './loading.module.scss';
+
 export default function Loading() {
   return (
-    <div style={{ minHeight: 775 }} className="loading-spinner">
+    <div className={styles.page}>
       <div className="spinner"></div>
       <p>Loading dashboard...</p>
     </div>

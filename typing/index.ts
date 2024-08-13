@@ -63,7 +63,7 @@ export interface IInstBrand {
   textColor: string;
 }
 
-interface IInstrument {
+export interface IInstrument {
   figi: string;
   ticker: string;
   classCode: string;
@@ -100,4 +100,21 @@ interface IInstrument {
   first1minCandleDate: string;
   first1dayCandleDate: string;
   brand: IBrand;
+}
+
+export interface IApiResponseShareItem {
+  data: IInstrument;
+}
+
+export interface IPrice {
+  units: string;
+  nano: number;
+}
+
+export interface IPriceInfo {
+  figi: string;
+  price: IPrice;
+  time: string;
+  instrumentUid: string;
+  lastPriceType: string;
 }
