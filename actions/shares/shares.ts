@@ -8,6 +8,8 @@ import {
   IInstrument,
 } from '@/typing';
 
+// todo need fix type and docs
+
 /**
  * Fetches the list of shares from the API.
  *

@@ -1,3 +1,5 @@
+// todo need fix type remove double
+
 export interface IBrand {
   bg: string;
   color: string;
