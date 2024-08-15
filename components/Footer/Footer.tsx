@@ -1,4 +1,3 @@
-// Footer.tsx
 import { getFooter } from '@/actions/footer';
 import styles from './footer.module.scss';
 

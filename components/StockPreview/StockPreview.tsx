@@ -5,7 +5,7 @@ type Props = {
   value: IFinancialInstrument;
 };
 
-export const SharePreview = ({ value }: Props) => {
+export const StockPreview = ({ value }: Props) => {
   return (
     <Link href={value.ticker} className={styles.card}>
       <div>

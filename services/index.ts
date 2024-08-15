@@ -1,1 +1,1 @@
-export * from './shares';
+export * from './stocks';

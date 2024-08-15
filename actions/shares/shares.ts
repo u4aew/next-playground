@@ -15,11 +15,11 @@ import {
  * defined by the `API_BASE_URL` and returns the response data.
  *
  * @async
- * @function getShares
+ * @function getStocks
  * @returns {Promise<Object>} A promise that resolves to an object containing the response data.
  * @throws {Error} Throws an error if the request fails.
  */
-export const getShares = async (
+export const getStocks = async (
   pagination: IPagination,
 ): Promise<IApiResponseShares> => {
   const { data } = await axios.get<{
@@ -38,7 +38,7 @@ export const getShares = async (
   };
 };
 
-export const getSharesByTicker = async (ticker: string): Promise<any> => {
+export const getStockByTicker = async (ticker: string): Promise<any> => {
   const { data } = await axios.get<{
     data: IInstrument;
   }>(`${API_BASE_URL}/sharesByTicker`, {

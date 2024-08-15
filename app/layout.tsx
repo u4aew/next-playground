@@ -1,10 +1,11 @@
 import { Open_Sans } from 'next/font/google';
-import './globals.css';
-import styles from './layout.module.scss';
+import { BASE_URL } from '@/config';
 import { Footer } from '@/components/Footer/Footer';
 import { Header } from '@/components/Header';
 import { Metadata } from 'next';
 import type { Viewport } from 'next';
+import styles from './layout.module.scss';
+import './globals.css';
 
 const roboto = Open_Sans({
   weight: '400',
@@ -49,10 +50,10 @@ export const metadata: Metadata = {
   authors: [
     {
       name: 'Financial Exchange Team',
-      url: 'https://stock-exchange.fancy-app.site',
+      url: BASE_URL,
     },
   ],
-  metadataBase: new URL('https://stock-exchange.fancy-app.site'),
+  metadataBase: new URL(BASE_URL),
   generator: 'Next.js',
   keywords: ['financial', 'exchange', 'trading', 'investment', 'platform'],
   referrer: 'origin',
@@ -60,11 +61,7 @@ export const metadata: Metadata = {
   publisher: 'Financial Exchange Inc.',
   robots: { index: true, follow: true },
   alternates: {
-    canonical: 'https://stock-exchange.fancy-app.site',
-    languages: {
-      en: 'https://stock-exchange.fancy-app.site/en',
-      es: 'https://stock-exchange.fancy-app.site/es',
-    },
+    canonical: BASE_URL,
   },
   icons: {
     icon: '/favicon.ico',
@@ -76,7 +73,7 @@ export const metadata: Metadata = {
     description:
       'A leading financial exchange platform for trading and investment.',
     type: 'website',
-    url: 'https://stock-exchange.fancy-app.site',
+    url: BASE_URL,
     siteName: 'Financial Exchange Platform',
     images: [
       {

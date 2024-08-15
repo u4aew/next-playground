@@ -18,9 +18,10 @@ interface CandlesProps {
   data: {
     candles: CandleData[];
   };
+  currency: string;
 }
 
-const Candles: FC<CandlesProps> = ({ data }) => {
+const Candles: FC<CandlesProps> = ({ data, currency }) => {
   const dataPoints = data.candles.map((candle) => ({
     x: new Date(candle.time),
     y: [
@@ -37,12 +38,12 @@ const Candles: FC<CandlesProps> = ({ data }) => {
       valueFormatString: 'DD MMM',
     },
     axisY: {
-      prefix: '$',
+      prefix: currency,
     },
     data: [
       {
         type: 'candlestick',
-        yValueFormatString: '$###0.00',
+        yValueFormatString: `${currency} ###0.00`,
         xValueFormatString: 'DD MMM YYYY',
         dataPoints: dataPoints,
       },

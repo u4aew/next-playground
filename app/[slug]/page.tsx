@@ -1,7 +1,8 @@
 import React from 'react';
 import { Metadata, ResolvingMetadata } from 'next';
-import { serviceShares } from '@/services';
-import { ShareIntro } from '@/components/ShareIntro';
+import { BASE_URL } from '@/config';
+import { serviceStocks } from '@/services';
+import { StockIntro } from '@/components/StockIntro';
 import { BuyStock } from '@/components/BuyStock';
 import Candles from '@/components/Candles/Candles';
 import styles from './styles.module.scss';
@@ -14,8 +15,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const shareData = await serviceShares.getByTicker(params.slug);
-  const dataIntro = shareData?.data;
+  const stockData = await serviceStocks.getByTicker(params.slug);
+  const dataIntro = stockData?.data;
 
   if (!dataIntro) {
     return {
@@ -25,7 +26,7 @@ export async function generateMetadata(
 
   const metaDescription = `Information about stock ${dataIntro.name} (${dataIntro.ticker}). Sector: ${dataIntro.sector}, Country: ${dataIntro.countryOfRisk}`;
   const keywords = `${dataIntro.name}, ${dataIntro.ticker}, ${dataIntro.sector}, ${dataIntro.countryOfRiskName}, stock, invest`;
-  const canonicalUrl = `https://stock-exchange.fancy-app.site/${params.slug}`;
+  const canonicalUrl = `${BASE_URL}/${params.slug}`;
 
   return {
     title: `${dataIntro.name} (${dataIntro.ticker}) - Information about stock`,
@@ -44,13 +45,13 @@ export async function generateMetadata(
 
 const PageStock = async ({ params }: Props) => {
   try {
-    const [shareData, lastPriceData, candlesData] = await Promise.all([
-      serviceShares.getByTicker(params.slug),
-      serviceShares.getLastPriceByTicker(params.slug),
-      serviceShares.getCandlesByTicker(params.slug),
+    const [stockData, lastPriceData, candlesData] = await Promise.all([
+      serviceStocks.getByTicker(params.slug),
+      serviceStocks.getLastPriceByTicker(params.slug),
+      serviceStocks.getCandlesByTicker(params.slug),
     ]);
 
-    const dataIntro = shareData?.data;
+    const dataIntro = stockData?.data;
     const dataLastPrice = lastPriceData?.data;
     const dataCandlesByTicker = candlesData?.data;
 
@@ -58,12 +59,32 @@ const PageStock = async ({ params }: Props) => {
       <div className={styles.page}>
         <div className={styles.main}>
           <div className={styles.intro}>
-            {dataIntro && <ShareIntro value={dataIntro} />}
+            {stockData?.data ? (
+              <StockIntro data={stockData?.data} />
+            ) : (
+              <span>Not data</span>
+            )}
           </div>
-          {dataCandlesByTicker && <Candles data={dataCandlesByTicker} />}
+          {candlesData?.data ? (
+            <Candles
+              currency={stockData?.data?.currency}
+              data={candlesData?.data}
+            />
+          ) : (
+            <span>Not data</span>
+          )}
         </div>
         <div className={styles.side}>
-          <BuyStock info={dataLastPrice} />
+          {lastPriceData?.data && candlesData?.data ? (
+            <BuyStock
+              candlesData={candlesData?.data}
+              currency={stockData?.data?.currency}
+              data={lastPriceData?.data}
+            />
+          ) : (
+            <span>Not data</span>
+          )}
+
         </div>
       </div>
     );
