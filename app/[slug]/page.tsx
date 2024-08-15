@@ -23,8 +23,9 @@ export async function generateMetadata(
     };
   }
 
-  const metaDescription = `Information about stock ${dataIntro.name} (${dataIntro.ticker}). Sector: ${dataIntro.sector}, Country: ${dataIntro.countryOfRiskName}`;
+  const metaDescription = `Information about stock ${dataIntro.name} (${dataIntro.ticker}). Sector: ${dataIntro.sector}, Country: ${dataIntro.countryOfRisk}`;
   const keywords = `${dataIntro.name}, ${dataIntro.ticker}, ${dataIntro.sector}, ${dataIntro.countryOfRiskName}, stock, invest`;
+  const canonicalUrl = `https://stock-exchange.fancy-app.site/${params.slug}`;
 
   return {
     title: `${dataIntro.name} (${dataIntro.ticker}) - Information about stock`,
@@ -34,6 +35,9 @@ export async function generateMetadata(
       title: `${dataIntro.name} (${dataIntro.ticker}) - Information about stock`,
       description: metaDescription,
       type: 'website',
+    },
+    alternates: {
+      canonical: canonicalUrl,
     },
   };
 }
