@@ -84,7 +84,6 @@ const PageStock = async ({ params }: Props) => {
           ) : (
             <span>Not data</span>
           )}
-
         </div>
       </div>
     );

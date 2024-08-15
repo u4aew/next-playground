@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import classNames from 'classnames';
 import { createPageArray } from '@/utils';
-
+import dynamic from 'next/dynamic';
+const LoadMore = dynamic(() => import('./LoadMore'), { ssr: false });
 import styles from './pagination.module.scss';
 
 export const Pagination = ({
@@ -35,12 +36,11 @@ export const Pagination = ({
   return (
     <div className={styles.box}>
       <div className={styles.loadMore}>
-        <Link
-          className={styles.btn}
-          href={`?start=${currentStart}&end=${currentEnd + itemsPerPage}`}
-        >
-          Show more
-        </Link>
+        <LoadMore
+          currentStart={currentStart}
+          currentEnd={currentEnd}
+          itemsPerPage={itemsPerPage}
+        />
       </div>
       <div className={styles.pagination}>
         <div className={styles.prev}>

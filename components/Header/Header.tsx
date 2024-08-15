@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Logo } from '@/components/Logo';
 import { Profile } from '@/components/Profile';
 
@@ -10,9 +9,9 @@ export const Header = () => {
     <div className={styles.header}>
       <div className={styles.main}>
         <div className={styles.logo}>
-          <Link href="/" aria-label="Homepage">
+          <a href="/" aria-label="Homepage">
             <Logo />
-          </Link>
+          </a>
         </div>
       </div>
       <div className={styles.side}>
