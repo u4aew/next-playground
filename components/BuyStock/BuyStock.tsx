@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles.module.scss';
+import { Button } from '@/components/Button';
 
 interface Price {
   units: string;
@@ -15,16 +16,16 @@ interface PriceInfo {
 }
 
 export const BuyStock: React.FC<{ info: PriceInfo }> = ({ info }) => {
-  const formattedDate = new Date(info.time).toLocaleString();
   const formattedPrice = parseFloat(
-    `${info.price.units}.${info.price.nano / 1e9}`,
+    `${info?.price?.units}.${info?.price?.nano / 1e9}`,
   ).toFixed(2);
 
   return (
     <div className={styles.box}>
-      <div>Date: {formattedDate}</div>
-      <div>Price: {formattedPrice}</div>
-      <button className={styles.buyButton}>Buy</button>
+      <div className={styles.price}>Price: {formattedPrice}</div>
+      <div className={styles.btn}>
+        <Button>Buy</Button>
+      </div>
     </div>
   );
 };

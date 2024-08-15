@@ -6,16 +6,14 @@
   text-align: center;
 }
 
-.buyButton {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.btn {
+  max-width: 120px;
+  margin: 0 auto;
 }
 
-.buyButton:hover {
-  background-color: #45a049;
+.date {
+  margin-bottom: 0;
+}
+.price {
+  margin-bottom: 15px;
 }

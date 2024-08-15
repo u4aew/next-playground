@@ -1,5 +1,10 @@
-import { getLastPriceByTicker, getShares, getSharesByTicker } from '@/actions/shares';
-import { IApiResponseShares, IPagination } from '@/typing';
+import {
+  getLastPriceByTicker,
+  getShares,
+  getSharesByTicker,
+  getCandlesByTicker,
+} from '@/actions/shares';
+import { IPagination } from '@/typing';
 
 class ServiceShares {
   loading: boolean = false;
@@ -27,6 +32,12 @@ class ServiceShares {
     } catch (e) {}
   }
 
+  async getCandlesByTicker(ticker: string) {
+    try {
+      const res = await getCandlesByTicker(ticker);
+      return res;
+    } catch (e) {}
+  }
 
   handleError(err: Error) {}
 }

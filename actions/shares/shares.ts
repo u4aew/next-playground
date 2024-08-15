@@ -60,3 +60,13 @@ export const getLastPriceByTicker = async (ticker: string): Promise<any> => {
   };
 };
 
+export const getCandlesByTicker = async (ticker: string): Promise<any> => {
+  const { data } = await axios.get<{
+    data: IInstrument;
+  }>(`${API_BASE_URL}/candlesByTicker`, {
+    params: { ticker },
+  });
+  return {
+    data,
+  };
+};

@@ -2,6 +2,7 @@
   max-width: var(--box-max-width);
   margin: 0 auto;
   display: flex;
+  margin-bottom: 30px;
 }
 
 .main {
@@ -11,4 +12,8 @@
 }
 .side {
   flex: 0 0 300px
+}
+
+.intro {
+  margin-bottom: 15px;
 }

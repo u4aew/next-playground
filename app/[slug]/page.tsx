@@ -1,25 +1,72 @@
 import React from 'react';
-import styles from './styles.module.scss';
+import { Metadata, ResolvingMetadata } from 'next';
+import { serviceShares } from '@/services';
 import { ShareIntro } from '@/components/ShareIntro';
 import { BuyStock } from '@/components/BuyStock';
-import { serviceShares } from '@/services';
+import Candles from '@/components/Candles/Candles';
+import styles from './styles.module.scss';
 
-const PageStock = async ({ params }: { params: { slug: string } }) => {
-  const { data } = await serviceShares.getByTicker(params.slug);
-  const { data: dataLastPrice } = await serviceShares.getLastPriceByTicker(
-    params.slug,
-  );
-  return (
-    <div className={styles.page}>
-      <div className={styles.main}>
-        {/*@ts-ignore*/}
-        <ShareIntro value={data} />
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const shareData = await serviceShares.getByTicker(params.slug);
+  const dataIntro = shareData?.data;
+
+  if (!dataIntro) {
+    return {
+      title: 'Stock not found',
+    };
+  }
+
+  const metaDescription = `Information about stock ${dataIntro.name} (${dataIntro.ticker}). Sector: ${dataIntro.sector}, Country: ${dataIntro.countryOfRiskName}`;
+  const keywords = `${dataIntro.name}, ${dataIntro.ticker}, ${dataIntro.sector}, ${dataIntro.countryOfRiskName}, stock, invest`;
+
+  return {
+    title: `${dataIntro.name} (${dataIntro.ticker}) - Information about stock`,
+    description: metaDescription,
+    keywords: keywords,
+    openGraph: {
+      title: `${dataIntro.name} (${dataIntro.ticker}) - Information about stock`,
+      description: metaDescription,
+      type: 'website',
+    },
+  };
+}
+
+const PageStock = async ({ params }: Props) => {
+  try {
+    const [shareData, lastPriceData, candlesData] = await Promise.all([
+      serviceShares.getByTicker(params.slug),
+      serviceShares.getLastPriceByTicker(params.slug),
+      serviceShares.getCandlesByTicker(params.slug),
+    ]);
+
+    const dataIntro = shareData?.data;
+    const dataLastPrice = lastPriceData?.data;
+    const dataCandlesByTicker = candlesData?.data;
+
+    return (
+      <div className={styles.page}>
+        <div className={styles.main}>
+          <div className={styles.intro}>
+            {dataIntro && <ShareIntro value={dataIntro} />}
+          </div>
+          {dataCandlesByTicker && <Candles data={dataCandlesByTicker} />}
+        </div>
+        <div className={styles.side}>
+          <BuyStock info={dataLastPrice} />
+        </div>
       </div>
-      <div className={styles.side}>
-        <BuyStock info={dataLastPrice} />
-      </div>
-    </div>
-  );
+    );
+  } catch (error) {
+    console.error('Error loading stock data:', error);
+    return <div>Error loading stock data</div>;
+  }
 };
 
 export default PageStock;
