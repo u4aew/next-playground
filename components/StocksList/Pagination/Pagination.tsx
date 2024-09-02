@@ -26,13 +26,7 @@ export const Pagination = ({
   const calculateEnd = (page: number) => page * itemsPerPage;
 
   const isActivePage = (page: number) => {
-    const pageStart = calculateStart(page);
-    const pageEnd = calculateEnd(page);
-    return (
-      (currentStart >= pageStart && currentStart < pageEnd) ||
-      (currentEnd > pageStart && currentEnd <= pageEnd) ||
-      (currentStart <= pageStart && currentEnd >= pageEnd)
-    );
+    return page === currentEnd / itemsPerPage;
   };
 
   return (

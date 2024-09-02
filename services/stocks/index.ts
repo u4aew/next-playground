@@ -9,7 +9,7 @@ import { IPagination } from '@/typing';
 class ServiceStocks {
   constructor() {}
 
-  async getList({ start = 1, end = 10 }: IPagination) {
+  async getList({ start = 1, end = 24 }: IPagination) {
     try {
       const res = await getStocks({ start, end });
       return res;

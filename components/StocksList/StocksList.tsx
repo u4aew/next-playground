@@ -3,7 +3,7 @@ import styles from './shares.module.scss';
 import { serviceStocks } from '@/services';
 import { Pagination } from '@/components/StocksList/Pagination';
 
-const ITEMS_PER_PAGE = 25;
+const ITEMS_PER_PAGE = 24;
 
 export const StocksList = async ({
   searchParams,
@@ -15,7 +15,7 @@ export const StocksList = async ({
 
   const responseShares = await serviceStocks.getList({ start, end });
 
-  const currentPage = Math.floor(start / ITEMS_PER_PAGE) + 1;
+  const currentPage = Math.floor(end / ITEMS_PER_PAGE);
   // @ts-ignore
   const totalPages = Math.ceil(responseShares.total / ITEMS_PER_PAGE);
 
@@ -32,7 +32,7 @@ export const StocksList = async ({
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          itemsPerPage={25}
+          itemsPerPage={ITEMS_PER_PAGE}
           currentStart={start}
           currentEnd={end}
         />
