@@ -1,5 +1,5 @@
 import React from 'react';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import { BASE_URL } from '@/config';
 import { serviceStocks } from '@/services';
 import { StockIntro } from '@/components/StockIntro';
@@ -11,12 +11,8 @@ type Props = {
   params: { slug: string };
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const stockData = await serviceStocks.getByTicker(params.slug);
-  const dataIntro = stockData?.data;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const dataIntro = await serviceStocks.getByTicker(params.slug);
 
   if (!dataIntro) {
     return {
@@ -51,35 +47,28 @@ const PageStock = async ({ params }: Props) => {
       serviceStocks.getCandlesByTicker(params.slug),
     ]);
 
-    const dataIntro = stockData?.data;
-    const dataLastPrice = lastPriceData?.data;
-    const dataCandlesByTicker = candlesData?.data;
-
     return (
       <div className={styles.page}>
         <div className={styles.main}>
           <div className={styles.intro}>
-            {stockData?.data ? (
-              <StockIntro data={stockData?.data} />
+            {stockData ? (
+              <StockIntro data={stockData} />
             ) : (
               <span>Not data</span>
             )}
           </div>
-          {candlesData?.data ? (
-            <Candles
-              currency={stockData?.data?.currency}
-              data={candlesData?.data}
-            />
+          {candlesData ? (
+            <Candles currency={stockData?.currency} data={candlesData} />
           ) : (
             <span>Not data</span>
           )}
         </div>
         <div className={styles.side}>
-          {lastPriceData?.data && candlesData?.data ? (
+          {lastPriceData && candlesData ? (
             <BuyStock
-              candlesData={candlesData?.data}
-              currency={stockData?.data?.currency}
-              data={lastPriceData?.data}
+              candlesData={candlesData}
+              currency={stockData?.currency}
+              data={lastPriceData}
             />
           ) : (
             <span>Not data</span>

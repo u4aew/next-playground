@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import styles from './styles.module.scss';
 const Chart = dynamic(() => import('./Chart/Chart'), { ssr: false });
 
-const Candles = ({ data, currency }: { data: any, currency: string }) => {
+const Candles = ({ data, currency }: { data: any, currency: any }) => {
   return (
     <div className={styles.chart}>
       <Chart data={data} currency={currency} />
