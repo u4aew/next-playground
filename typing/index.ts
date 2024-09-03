@@ -1,3 +1,5 @@
+// todo need fix type remove double
+
 export interface IBrand {
   bg: string;
   color: string;
@@ -55,6 +57,12 @@ export interface INominal {
 export interface IMinPriceIncrement {
   units: string;
   nano: number;
+}
+
+export interface IInstBrand {
+  logoName: string;
+  logoBaseColor: string;
+  textColor: string;
 }
 
 export interface IInstrument {

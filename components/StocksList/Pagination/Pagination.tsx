@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 const LoadMore = dynamic(() => import('./LoadMore'), { ssr: false });
 import styles from './pagination.module.scss';
 
+// todo need fix load more
+
 export const Pagination = ({
   currentPage,
   totalPages,

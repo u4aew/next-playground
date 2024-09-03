@@ -8,16 +8,17 @@ import {
   IInstrument,
 } from '@/typing';
 
+// todo need fix type and docs
+
 /**
  * Fetches the list of shares from the API.
  *
- * This function makes a GET request to the /shares endpoint of the API
- * defined by the API_BASE_URL and returns the response data.
+ * This function makes a GET request to the `/shares` endpoint of the API
+ * defined by the `API_BASE_URL` and returns the response data.
  *
  * @async
  * @function getStocks
- * @param {IPagination} pagination - The pagination parameters for the request.
- * @returns {Promise<IApiResponseShares>} A promise that resolves to an object containing the list of shares and pagination information.
+ * @returns {Promise<Object>} A promise that resolves to an object containing the response data.
  * @throws {Error} Throws an error if the request fails.
  */
 export const getStocks = async (
@@ -39,71 +40,35 @@ export const getStocks = async (
   };
 };
 
-/**
- * Fetches details of a specific stock by its ticker.
- *
- * This function makes a GET request to the /sharesByTicker endpoint of the API
- * and returns the detailed information about the stock.
- *
- * @async
- * @function getStockByTicker
- * @param {string} ticker - The ticker symbol of the stock.
- * @returns {Promise<IInstrument>} A promise that resolves to an object containing the stock details.
- * @throws {Error} Throws an error if the request fails.
- */
-export const getStockByTicker = async (
-  ticker: string,
-): Promise<IInstrument> => {
+export const getStockByTicker = async (ticker: string): Promise<any> => {
   const { data } = await axios.get<{
     data: IInstrument;
   }>(`${API_BASE_URL}/sharesByTicker`, {
     params: { ticker },
   });
-  return data.data;
+  return {
+    data,
+  };
 };
 
-/**
- * Fetches the last price of a stock by its ticker.
- *
- * This function makes a GET request to the /lastPriceByTicker endpoint of the API
- * and returns the last known price of the stock.
- *
- * @async
- * @function getLastPriceByTicker
- * @param {string} ticker - The ticker symbol of the stock.
- * @returns {Promise<IInstrument>} A promise that resolves to an object containing the last price of the stock.
- * @throws {Error} Throws an error if the request fails.
- */
-export const getLastPriceByTicker = async (
-  ticker: string,
-): Promise<IInstrument> => {
+export const getLastPriceByTicker = async (ticker: string): Promise<any> => {
   const { data } = await axios.get<{
     data: IInstrument;
   }>(`${API_BASE_URL}/lastPriceByTicker`, {
     params: { ticker },
   });
-  return data.data;
+  return {
+    data,
+  };
 };
 
-/**
- * Fetches the candle data for a stock by its ticker.
- *
- * This function makes a GET request to the /candlesByTicker endpoint of the API
- * and returns the candle data for the stock.
- *
- * @async
- * @function getCandlesByTicker
- * @param {string} ticker - The ticker symbol of the stock.
- * @returns {Promise<IInstrument>} A promise that resolves to an object containing the candle data.
- * @throws {Error} Throws an error if the request fails.
- */
-export const getCandlesByTicker = async (
-  ticker: string,
-): Promise<IInstrument> => {
+export const getCandlesByTicker = async (ticker: string): Promise<any> => {
   const { data } = await axios.get<{
     data: IInstrument;
   }>(`${API_BASE_URL}/candlesByTicker`, {
     params: { ticker },
   });
-  return data.data;
+  return {
+    data,
+  };
 };
