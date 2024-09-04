@@ -55,31 +55,26 @@ const PageStock = async ({ params }: Props) => {
     const dataLastPrice = lastPriceData?.data;
     const dataCandlesByTicker = candlesData?.data;
 
+    const renderContent = (data: any, Component: React.FC<any>, props: any) =>
+      data ? <Component {...props} /> : <span>Not data</span>;
+
     return (
       <div className={styles.page}>
         <div className={styles.main}>
           <div className={styles.intro}>
-            {stockData?.data ? (
-              <StockIntro data={stockData?.data} />
-            ) : (
-              <span>Not data</span>
-            )}
+            {renderContent(dataIntro, StockIntro, { data: dataIntro })}
           </div>
-          {candlesData?.data ? (
-            <Candles
-              currency={stockData?.data?.currency}
-              data={candlesData?.data}
-            />
-          ) : (
-            <span>Not data</span>
-          )}
+          {renderContent(dataCandlesByTicker, Candles, {
+            currency: dataIntro?.currency,
+            data: dataCandlesByTicker,
+          })}
         </div>
         <div className={styles.side}>
-          {lastPriceData?.data && candlesData?.data ? (
+          {dataLastPrice && dataCandlesByTicker ? (
             <BuyStock
-              candlesData={candlesData?.data}
-              currency={stockData?.data?.currency}
-              data={lastPriceData?.data}
+              candlesData={dataCandlesByTicker}
+              currency={dataIntro?.currency}
+              data={dataLastPrice}
             />
           ) : (
             <span>Not data</span>
