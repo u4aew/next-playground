@@ -5,6 +5,9 @@ export const Footer = async () => {
   const { data } = await getFooter();
   return (
     <footer className={styles.footer}>
+      <div className={styles.github}>
+        <a target='_blank' href="https://github.com/u4aew/ssr-playground">Github</a>
+      </div>
       <div className={styles.grid}>
         {data.columns.map((column, index) => (
           <div key={index} className={styles.column}>
