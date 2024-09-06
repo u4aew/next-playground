@@ -1,27 +1,17 @@
 import React, { FC } from 'react';
 // @ts-ignore
 import CanvasJSReact from '@canvasjs/react-charts';
+import { ICandle } from '@/typing';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-interface CandleData {
-  open: { units: string; nano: number };
-  high: { units: string; nano: number };
-  low: { units: string; nano: number };
-  close: { units: string; nano: number };
-  volume: string;
-  time: string;
-  isComplete: boolean;
-  candleSource: string;
-}
-
-interface CandlesProps {
+interface ChartProps {
   data: {
-    candles: CandleData[];
+    candles: ICandle[];
   };
   currency?: string;
 }
 
-const Candles: FC<CandlesProps> = ({ data, currency }) => {
+const Chart: FC<ChartProps> = ({ data, currency }) => {
   const dataPoints = data.candles.map((candle) => ({
     x: new Date(candle.time),
     y: [
@@ -53,4 +43,4 @@ const Candles: FC<CandlesProps> = ({ data, currency }) => {
   return <CanvasJSChart options={options} />;
 };
 
-export default Candles;
+export default Chart;

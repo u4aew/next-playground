@@ -1,6 +1,6 @@
 # SSR Financial Application
 
-This is a financial application built with Next.js, utilizing Server-Side Rendering (SSR). It provides financial data visualization using various charting libraries.
+This is a financial application built with Next.js, utilizing Server-Side Rendering (SSR). It provides financial data visualization using various charting libraries [details](https://dev.to/u4aew/creating-an-ssr-application-on-nextjs-14-7bf).
 
 ![intro](img/intro.jpg)
 
