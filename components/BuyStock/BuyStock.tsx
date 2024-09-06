@@ -17,13 +17,16 @@ interface PriceInfo {
 }
 
 export const BuyStock: React.FC<{
-  data: PriceInfo;
+  data?: PriceInfo;
   currency?: string;
   candlesData: any;
 }> = ({ data, currency, candlesData }) => {
-  const formattedPrice = parseFloat(
-    `${data?.price?.units}.${data?.price?.nano / 1e9}`,
-  ).toFixed(2);
+  let formattedPrice = '';
+  if (data) {
+    formattedPrice = parseFloat(
+      `${data?.price?.units}.${data?.price?.nano / 1e9}`,
+    ).toFixed(2);
+  }
 
   return (
     <div className={styles.box}>

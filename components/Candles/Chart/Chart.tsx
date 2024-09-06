@@ -18,7 +18,7 @@ interface CandlesProps {
   data: {
     candles: CandleData[];
   };
-  currency: string;
+  currency?: string;
 }
 
 const Candles: FC<CandlesProps> = ({ data, currency }) => {
