@@ -1,10 +1,15 @@
 import axios from 'axios';
 import { API_BASE_URL } from '@/config';
 import {
-  IApiResponseShares,
+  IApiResponseStocks,
+  IApiResponseStockItem,
+  IApiResponsePriceInfo,
+  IApiResponseCandle,
+  ICandle,
   IFinancialInstrument,
   IPagination,
   IInstrument,
+  IPriceInfo,
 } from '@/typing';
 
 /**
@@ -18,12 +23,12 @@ import {
  * @param {IPagination} pagination - An object containing pagination parameters.
  * @param {number} pagination.page - The page number to fetch.
  * @param {number} pagination.pageSize - The number of items to return per page.
- * @returns {Promise<IApiResponseShares>} A promise that resolves to an object containing the response data.
+ * @returns {Promise<IApiResponseStocks>} A promise that resolves to an object containing the response data.
  * @throws {Error} Throws an error if the request fails.
  */
 export const getStocks = async (
   pagination: IPagination,
-): Promise<IApiResponseShares> => {
+): Promise<IApiResponseStocks> => {
   const { data } = await axios.get<{
     data: IFinancialInstrument[];
     start: number;
@@ -54,10 +59,8 @@ export const getStocks = async (
  */
 export const getStockByTicker = async (
   ticker: string,
-): Promise<{ data: any }> => {
-  const { data } = await axios.get<{
-    data: IInstrument;
-  }>(`${API_BASE_URL}/sharesByTicker`, {
+): Promise<IApiResponseStockItem> => {
+  const { data } = await axios.get(`${API_BASE_URL}/sharesByTicker`, {
     params: { ticker },
   });
   return { data };
@@ -72,15 +75,13 @@ export const getStockByTicker = async (
  * @async
  * @function getLastPriceByTicker
  * @param {string} ticker - The ticker symbol of the stock to fetch the latest price for.
- * @returns {Promise<{ data: IInstrument }>} A promise that resolves to an object containing the response data.
+ * @returns {Promise<{ data: IPriceInfo }>} A promise that resolves to an object containing the response data.
  * @throws {Error} Throws an error if the request fails.
  */
 export const getLastPriceByTicker = async (
   ticker: string,
-): Promise<{ data: any }> => {
-  const { data } = await axios.get<{
-    data: IInstrument;
-  }>(`${API_BASE_URL}/lastPriceByTicker`, {
+): Promise<IApiResponsePriceInfo> => {
+  const { data } = await axios.get(`${API_BASE_URL}/lastPriceByTicker`, {
     params: { ticker },
   });
   return { data };
@@ -95,14 +96,14 @@ export const getLastPriceByTicker = async (
  * @async
  * @function getCandlesByTicker
  * @param {string} ticker - The ticker symbol of the stock to fetch the candlestick data for.
- * @returns {Promise<{ data: IInstrument }>} A promise that resolves to an object containing the response data.
+ * @returns {Promise<{ data: ICandle[] }>} A promise that resolves to an object containing the response data.
  * @throws {Error} Throws an error if the request fails.
  */
 export const getCandlesByTicker = async (
   ticker: string,
-): Promise<{ data: any }> => {
+): Promise<{ data: IApiResponseCandle }> => {
   const { data } = await axios.get<{
-    data: IInstrument;
+    data: ICandle[];
   }>(`${API_BASE_URL}/candlesByTicker`, {
     params: { ticker },
   });

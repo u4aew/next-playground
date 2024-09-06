@@ -1,5 +1,3 @@
-// todo need fix type remove double
-
 export interface IBrand {
   bg: string;
   color: string;
@@ -34,13 +32,6 @@ export interface IFooterData {
 
 export interface IApiResponseFooter {
   data: IFooterData;
-}
-
-export interface IApiResponseShares {
-  data: IFinancialInstrument[];
-  total: number;
-  start: number;
-  end: number;
 }
 
 export interface IPagination {
@@ -104,7 +95,14 @@ export interface IInstrument {
   brand: IBrand;
 }
 
-export interface IApiResponseShareItem {
+export interface IApiResponseStocks {
+  data: IFinancialInstrument[];
+  total: number;
+  start: number;
+  end: number;
+}
+
+export interface IApiResponseStockItem {
   data: IInstrument;
 }
 
@@ -119,4 +117,23 @@ export interface IPriceInfo {
   time: string;
   instrumentUid: string;
   lastPriceType: string;
+}
+
+export interface IApiResponsePriceInfo {
+  data: IPriceInfo;
+}
+
+export interface ICandle {
+  open: IPrice;
+  high: IPrice;
+  low: IPrice;
+  close: IPrice;
+  volume: string;
+  time: string;
+  isComplete: boolean;
+  candleSource: string;
+}
+
+export interface IApiResponseCandle {
+  data: ICandle[];
 }

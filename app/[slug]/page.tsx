@@ -15,8 +15,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const stockData = await serviceStocks.getByTicker(params.slug);
-  const dataIntro = stockData?.data;
+  const { data: dataIntro } =
+    (await serviceStocks.getByTicker(params.slug)) || {};
 
   if (!dataIntro) {
     return {
@@ -51,9 +51,9 @@ const PageStock = async ({ params }: Props) => {
       serviceStocks.getCandlesByTicker(params.slug),
     ]);
 
-    const dataIntro = stockData?.data;
-    const dataLastPrice = lastPriceData?.data;
-    const dataCandlesByTicker = candlesData?.data;
+    const { data: dataIntro } = stockData || {};
+    const { data: dataLastPrice } = lastPriceData || {};
+    const { data: dataCandlesByTicker } = candlesData || {};
 
     const renderContent = (data: any, Component: React.FC<any>, props: any) =>
       data ? <Component {...props} /> : <span>Not data</span>;

@@ -18,7 +18,7 @@ interface PriceInfo {
 
 export const BuyStock: React.FC<{
   data: PriceInfo;
-  currency: string;
+  currency?: string;
   candlesData: any;
 }> = ({ data, currency, candlesData }) => {
   const formattedPrice = parseFloat(
