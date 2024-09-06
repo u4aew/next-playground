@@ -1,4 +1,3 @@
-
 # SSR Financial Application
 
 This is a financial application built with Next.js, utilizing Server-Side Rendering (SSR). It provides financial data visualization using various charting libraries.
@@ -81,4 +80,3 @@ This project uses TypeScript for type safety and ESLint for maintaining code qua
 ## License
 
 This project is licensed under the MIT License.
-```
